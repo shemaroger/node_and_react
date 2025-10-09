@@ -1,4 +1,5 @@
 const db = require('../config/database');
+const bcrypt = require('bcryptjs'); // Make sure this is bcryptjs
 
 class User {
     static async createTable() {
