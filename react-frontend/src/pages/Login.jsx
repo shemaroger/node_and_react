@@ -1,23 +1,41 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import api from '../service/api';
 
 const Login = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
+    // Clear error when user starts typing
+    if (error) setError('');
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Login data:', formData);
-    // TODO: Implement login logic
+    setError('');
+    setLoading(true);
+
+    try {
+      const response = await api.login(formData);
+      console.log('Login successful:', response);
+      
+      // Redirect to dashboard or home page
+      navigate('/dashboard'); // Change to your desired route
+    } catch (err) {
+      setError(err.message || 'Login failed. Please check your credentials.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -25,6 +43,13 @@ const Login = () => {
       <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
         Sign In
       </h2>
+      
+      {error && (
+        <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+          {error}
+        </div>
+      )}
+
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-gray-700">
@@ -38,6 +63,7 @@ const Login = () => {
             onChange={handleChange}
             className="input-field"
             required
+            disabled={loading}
           />
         </div>
         <div>
@@ -52,10 +78,15 @@ const Login = () => {
             onChange={handleChange}
             className="input-field"
             required
+            disabled={loading}
           />
         </div>
-        <button type="submit" className="w-full btn-primary">
-          Sign In
+        <button 
+          type="submit" 
+          className="w-full btn-primary"
+          disabled={loading}
+        >
+          {loading ? 'Signing In...' : 'Sign In'}
         </button>
       </form>
       <p className="mt-4 text-center text-sm text-gray-600">
