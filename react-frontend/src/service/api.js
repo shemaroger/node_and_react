@@ -1,30 +1,55 @@
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+// Fallback for non-CRA environments or missing env variables
+const API_BASE_URL = typeof process !== 'undefined' && process.env?.REACT_APP_API_URL 
+  ? process.env.REACT_APP_API_URL 
+  : 'http://localhost:5000/api';
 
 class ApiService {
   constructor() {
-    this.token = localStorage.getItem('token');
+    this.baseURL = API_BASE_URL;
+    this.token = null;
+    this.loadToken();
+  }
+
+  // Load token from localStorage
+  loadToken() {
+    try {
+      this.token = localStorage.getItem('token');
+    } catch (error) {
+      console.error('Error loading token:', error);
+    }
   }
 
   // Set auth token
   setToken(token) {
     this.token = token;
-    localStorage.setItem('token', token);
+    try {
+      localStorage.setItem('token', token);
+    } catch (error) {
+      console.error('Error saving token:', error);
+    }
   }
 
   // Remove auth token
   removeToken() {
     this.token = null;
-    localStorage.removeItem('token');
+    try {
+      localStorage.removeItem('token');
+    } catch (error) {
+      console.error('Error removing token:', error);
+    }
   }
 
   // Get auth token
   getToken() {
-    return this.token || localStorage.getItem('token');
+    if (!this.token) {
+      this.loadToken();
+    }
+    return this.token;
   }
 
   // Generic request handler
   async request(endpoint, options = {}) {
-    const url = `${API_BASE_URL}${endpoint}`;
+    const url = `${this.baseURL}${endpoint}`;
     const headers = {
       'Content-Type': 'application/json',
       ...options.headers,
