@@ -1,3 +1,13 @@
+/* 
+JavaScript is a high-level, dynamic, and interpreted programming language 
+used to create interactive and responsive web pages. It allows developers 
+to add functionality, control multimedia, animate elements, 
+and communicate with web servers — making websites dynamic and user-friendly.
+*/
+
+
+
+
 console.log("Hello, JavaScript!!!");
 let firstName = "John";
 console.log("My name is " + firstName + ".");
