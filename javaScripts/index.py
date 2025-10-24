@@ -44,28 +44,71 @@
 # person1.have_birthday()
 
 
-from datetime import datetime
-class User:
-    def __init__(self, username, email, password):
-        self.username = username 
-        self._email = email
-        self.password = password
-    def get_email(self):
-        print(f"Email is access at {datetime.now()}")
-        return self._email
-    def set_email(self, new_email):
-        if "@" and ".com" in new_email:
-            self._email = new_email
-            print(f"Email is updated successfully at {datetime.now()} ")
-        else:
-            return print("Email will not be updated because of Invalid email")
+# from datetime import datetime
+# class User:
+#     counte_user = 0
+#     def __init__(self, username, email, password):
+#         self.username = username 
+#         self._email = email
+#         self.password = password
+#         User.counte_user += 1
+#     # def get_email(self):
+#     #     print(f"Email is access at {datetime.now()}")
+#     #     return self._email
+#     @property
+#     def email(self):
+#         print(f"Email is accesss at {datetime.now()}")
+#         return self._email
+#     # def set_email(self, new_email):
+#     #     if "@" and ".com" in new_email:
+#     #         self._email = new_email
+#     #         print(f"Email is updated successfully at {datetime.now()} ")
+#     #     else:
+#     #         return print("Email will not be updated because of Invalid email")
+#     @email.setter
+#     def email(self, new_email):
+#         if "@" and ".com" in new_email:
+#             print(f"Email is updated at {datetime.now()}")
+#             self._email = new_email
+
+#         else:
+#             print("Email is not modified")
 
 
-user = User("SHEMA", "shema@shema.com", "123")
-print(user.get_email())
-user.set_email("roger@")
-print(user.get_email())
 
+# user = User("SHEMA", "shema@shema.com", "123")
 
+# print(user.email)
+# user.email= "roger@shema.com"
+# print(user.email)
+# print(User.counte_user)
 
+# class BankAccount:
+
+#     def __init__(self, owner, balance):
+#         MIN_BALANCE = 100
+#         self.owner = owner
+#         self.balance = balance
+#     def _is_vaild_amount(self, amount):
+#         return amount > 0
+
+#     def deposit(self, amount):
+#         if self._is_vaild_amount:
+#             self.balance += amount  
+#             print(f"{self.owner}'s new balance: ${self.balance}")
+#             self.__log_transaction("Deposit", amount)
+#         else:
+#             print("Deposit amount must be postive")
+#     def __log_transaction(self, transaction_type, amount):
+#         print(f"Logging {transaction_type} of ${amount}. new balance: ${self.balance}")        
+
+#     @staticmethod
+#     def is_valid_interest_rate(rate):
+#         return 5 <= rate <= 10
+
+# account = BankAccount("Alive", 1000)
+# account.deposit(500)  
+# print(f"BANK interest rate {BankAccount.is_valid_interest_rate(70)}")  
+
+        
 
