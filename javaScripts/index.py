@@ -26,8 +26,6 @@
 # print(my_dog.owner.name)
 # my_dog.bark() 
 
-
-
 # class Person:
 #     def __init__(self, name, age):
 #         self.name = name
@@ -112,3 +110,108 @@
 
         
 
+class BankAccount:
+    def __init__(self):
+        self._balance = 0.0
+
+    @property
+    def balance(self):
+        return self._balance
+
+    def deposit(self, amount):
+        if amount <= 0:
+            raise ValueError("Deposit amount must be positive")
+        self._balance += amount    
+    def withdraw(self, amount):
+        if amount <= 0:
+            raise ValueError("Withdraw amount must be more that 0")
+        if self._balance <= amount:
+            raise ValueError("Insufficient amount")
+        self._balance -= amount 
+
+# account = BankAccount()
+# print(account.balance)
+# account.deposit(500.0)
+# print(account.balance)
+# account.withdraw(200.6)
+# print(account.balance)
+
+class EmailService:
+    def _connectEmail(self):
+        print("Connet to server")
+    def _autheticated(self):
+        print("Authenticating.......")
+    def sendingEmail(self):
+        self._connectEmail()
+        self._autheticated()
+        print("Sending email.........")
+        self._disconnectEmail()
+    def _disconnectEmail(self):
+        print("Disconnecting on server")       
+
+# email = EmailService()
+# email.sendingEmail()
+
+
+# class Vehicle:
+#     def __init__(self, brand, model, year):
+#         self.brand = brand
+#         self.model = model
+#         self.year = year
+#     def start(self):
+#         print("Vehicle is started") 
+#     def stop(self):
+#         print("Vehicle is stopped")
+# class Car(Vehicle):
+#     def __init__(self,brand, model, year, number_of_doord, number_of_wheels ):
+#         super().__init__(brand, model, year)
+#         self.number_of_doord = number_of_doord
+#         self.number_of_wheels = number_of_wheels
+
+# class Bike(Vehicle):
+#     def __init__(self, brand, model, year, number_of_wheels):
+#         super().__init__(brand, model, year)
+#         self.number_of_wheels = number_of_wheels
+
+
+# car = Car("Ford", "Focus", 2023, 4, 4)
+# bike = Bike("Honda", "Scoopy", 2025, 2)
+# print(car.__dict__)
+# print(bike.__dict__)
+# car.start()
+# bike.start()
+
+# class Vehicle:
+#     def __init__(self, brand, model, year):
+#         self.brand = brand
+#         self.model = model
+#         self.year = year
+# class Car(Vehicle):
+#     def __init__(self,brand, model, year, number_of_doord):
+#         super().__init__(brand, model, year)      
+#         self.number_of_doord = number_of_doord
+
+# class Bike(Vehicle):
+#     def __init__(self,brand, model, year, number_of_doord, number_of_wheels):
+#         super().__init__(brand, model, year)
+#         self.number_of_boord = number_of_doord
+#         self.number_of_wheels = number_of_wheels
+
+# vehicles: list[Vehicle] = [
+#     Car("Benz", "Cool", 2022, 5),
+#     Bike("Honda","Super", 2025, 4,2)
+# ]
+
+# for vehicle in vehicles:
+#     print(f"Inspect {vehicle.model}, {vehicle.model}, {vehicle.year} ({type(vehicle).__name__})")
+    
+
+
+
+
+name = input("What is your name? ")
+age = int(input("How old are you? "))
+print(f"Hello: {name}, {age} years old")
+
+        
+        
