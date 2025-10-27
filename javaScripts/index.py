@@ -209,9 +209,5 @@ class EmailService:
 
 
 
-name = input("What is your name? ")
-age = int(input("How old are you? "))
-print(f"Hello: {name}, {age} years old")
-
         
         
